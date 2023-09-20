@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Assignment - 2</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="index.js"></script>
+    <style>
+        .header {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #F59E0B, #F472B6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 1px #F59E0B, 0 0 3px #F59E0B, 0 0 5px #F59E0B;
+            }
+
+            100% {
+                text-shadow: 0 0 3px #F59E0B, 0 0 5px #F59E0B, 0 0 7px #F59E0B;
+            }
+        }
+            button {
+ align-items: center;
+ background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+ border: 0;
+ border-radius: 10px;
+ box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+ box-sizing: border-box;
+ color: #FFFFFF;
+ display: flex;
+ font-family: Phantomsans, sans-serif;
+ font-size: 18px;
+ justify-content: center;
+ line-height: 1em;
+ max-width: 100%;
+ min-width: 140px;
+ padding: 3px;
+ text-decoration: none;
+ user-select: none;
+ -webkit-user-select: none;
+ touch-action: manipulation;
+ white-space: nowrap;
+ cursor: pointer;
+ transition: all .3s;
+ margin-right:20px
+}
+
+button:active,
+button:hover {
+ outline: 0;
+}
+
+button span {
+ background-color: rgb(5, 6, 45);
+ padding: 16px 24px;
+ border-radius: 6px;
+ width: 100%;
+ height: 100%;
+ transition: 300ms;
+}
+
+button:hover span {
+ background: none;
+}
+
+button:active {
+ transform: scale(0.9);
+}
+        .glowing-neon {
+            text-shadow: 0 0 5px #8e2de2, 0 0 10px #8e2de2, 0 0 15px #8e2de2, 0 0 20px #8e2de2, 0 0 25px #8e2de2, 0 0 30px #8e2de2, 0 0 35px #8e2de2;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px #8e2de2, 0 0 10px #8e2de2, 0 0 15px #8e2de2, 0 0 20px #8e2de2, 0 0 25px #8e2de2, 0 0 30px #8e2de2, 0 0 35px #8e2de2;
+            }
+            100% {
+                text-shadow: 0 0 10px #8e2de2, 0 0 20px #8e2de2, 0 0 30px #8e2de2, 0 0 40px #8e2de2, 0 0 50px #8e2de2, 0 0 60px #8e2de2, 0 0 70px #8e2de2;
+            }
+        }
+
+    
+            /* Custom CSS for glowing effect */
+        .glowing-container {
+            background: radial-gradient(circle, #8e2de2 0%, transparent 70%);
+            background-size: 150% 150%;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+        
+        .custom-bg-rgb {
+    background-color: rgb(40, 40, 43);
+}
+
+    </style>
+</head>
+
+<body class="font-poppins text-xl custom-bg-rgb text-white">
+    <header class="text-white py-4 flex justify-between items-center">
+        <h1 class="text-3xl font-bold text-center flex-grow glowing-neon">Assignment - 2</h1>
+        <button onclick="homepage()"><span class="text">Home</span></button>
+    </header>
+
+    <section class="container mx-auto p-4 bg-white shadow-lg rounded-lg mt-8 text-gray-800 bg-opacity-90 glowing-container ">
+        <h2 class="text-2xl font-semibold mb-2 text-blue-500">Matrix Chain Multiplication</h2>
+        <p class="mb-4 text-white font-poppins">Example code of a Matrix Chain Multiplication implemented in Python:</p>
+        <pre class="bg-gray-200 p-4 rounded-md">
+            <code class="block text-sm  text-xl font-poppins">
+                def matrix_chain_multiplication(matrices):
+                n = len(matrices)
+                
+                for i in range(1, n):
+                    if matrices[i-1][1] != matrices[i][0]:
+                        raise ValueError("Matrix dimensions are not compatible for multiplication.")
+                
+                min_scalar_multiplications = [[0] * n for _ in range(n)]
+                split_positions = [[0] * n for _ in range(n)]
+                
+                for i in range(n):
+                    min_scalar_multiplications[i][i] = 0
+                
+                for l in range(2, n + 1):
+                    for i in range(n - l + 1):
+                        j = i + l - 1
+                        min_scalar_multiplications[i][j] = float('inf')
+                        for k in range(i, j):
+                            cost = (min_scalar_multiplications[i][k] +
+                                    min_scalar_multiplications[k+1][j] +
+                                    matrices[i][0] * matrices[k][1] * matrices[j][1])
+                            
+                            if cost < min_scalar_multiplications[i][j]:
+                                min_scalar_multiplications[i][j] = cost
+                                split_positions[i][j] = k
+                
+                def construct_parenthesization(i, j):
+                    if i == j:
+                        return f'M{str(i)}'
+                    else:
+                        k = split_positions[i][j]
+                        left = construct_parenthesization(i, k)
+                        right = construct_parenthesization(k + 1, j)
+                        return f'({left} * {right})'
+                
+                optimal_parenthesization = construct_parenthesization(0, n - 1)
+                minimum_scalar_multiplications = min_scalar_multiplications[0][n - 1]
+                
+                return optimal_parenthesization, minimum_scalar_multiplications
+            
+            </code>
+        </pre>
+    </section>
+
+    <section class="container mx-auto p-4 bg-white shadow-lg rounded-lg mt-8 text-gray-800 bg-opacity-90 glowing-container">
+        <h2 class="text-2xl font-semibold mb-2 text-blue-500">Applying Matrix Chain Multiplication</h2>
+        <p class="mb-4 text-white">We will apply the program to the given matrices and calculate the optimal parenthesization.:</p>
+        <pre class="bg-gray-200 p-4 rounded-md">
+            <code class="block text-sm">
+                def matrix_chain_multiplication(matrices):
+                n = len(matrices)
+                
+                for i in range(1, n):
+                    if matrices[i-1][1] != matrices[i][0]:
+                        raise ValueError("Matrix dimensions are not compatible for multiplication.")
+                
+                min_scalar_multiplications = [[0] * n for _ in range(n)]
+                split_positions = [[0] * n for _ in range(n)]
+                
+                for i in range(n):
+                    min_scalar_multiplications[i][i] = 0
+                
+                for l in range(2, n + 1):
+                    for i in range(n - l + 1):
+                        j = i + l - 1
+                        min_scalar_multiplications[i][j] = float('inf')
+                        for k in range(i, j):
+                            cost = (min_scalar_multiplications[i][k] +
+                                    min_scalar_multiplications[k+1][j] +
+                                    matrices[i][0] * matrices[k][1] * matrices[j][1])
+                            
+                            if cost < min_scalar_multiplications[i][j]:
+                                min_scalar_multiplications[i][j] = cost
+                                split_positions[i][j] = k
+                
+                def construct_parenthesization(i, j):
+                    if i == j:
+                        return f'M{str(i)}'
+                    else:
+                        k = split_positions[i][j]
+                        left = construct_parenthesization(i, k)
+                        right = construct_parenthesization(k + 1, j)
+                        return f'({left} * {right})'
+                
+                optimal_parenthesization = construct_parenthesization(0, n - 1)
+                minimum_scalar_multiplications = min_scalar_multiplications[0][n - 1]
+                
+                return optimal_parenthesization, minimum_scalar_multiplications
+            
+            try:
+                n = int(input("Enter the number of matrices: "))
+                matrices = []
+                for i in range(n):
+                    rows, cols = map(int, input(f"Enter dimensions for matrix {i+1} (rows cols): ").split())
+                    matrices.append((rows, cols))
+            
+                optimal_parenthesization, min_scalar_multiplications = matrix_chain_multiplication(matrices)
+            
+                print("Optimal Parenthesization:", optimal_parenthesization)
+                print("Minimum Scalar Multiplications:", min_scalar_multiplications)
+            except ValueError as e:
+                print(f"Error: {e}")
+            
+            </code>
+        </pre>
+        <pre class="text-white">
+<strong >Input:</strong>Enter the number of matrices: 3
+Enter dimensions for matrix 1 (rows cols): 2 3
+Enter dimensions for matrix 2 (rows cols): 3 4
+Enter dimensions for matrix 3 (rows cols): 4 2
+<strong>Output:</strong>Optimal Parenthesization: (M0 * (M1 * M2))
+Minimum Scalar Multiplications: 36
+        </pre>
+    </section>
+
+    <section class="container mx-auto p-4 bg-white shadow-lg rounded-lg mt-8 text-gray-800 bg-opacity-90 glowing-container text-white">
+        <h2 class="text-2xl font-semibold mb-2 text-blue-500">Time Complexity Analysis</h2>
+        <ul class="list-disc pl-6">
+            <li class="mb-2 text-white"><strong>Worst-Case Time Complexity:</strong> The worst-case scenario occurs when all
+                possible split positions are considered for each chain length. <strong>Time complexity is
+                    O(n^3)</strong> , where n is the number of matrices. </li>
+            <li class="mb-2 text-white"><strong>Best-Case Time Complexity:</strong> The best-case scenario occurs when the matrices
+                are already optimally parenthesized, and no dynamic programming updates are needed. <strong>Time
+                    complexity is O(n)</strong>, where n is the number of matrices.</li>
+            <li class="mb-2 text-white"><strong>Average-Case Time Complexity:</strong> The average-case time complexity is
+                also<strong> O(n^3)</strong>, as it is determined by the same loop structure used in the worst-case
+                scenario.</li>
+        </ul>
+        <h2 class="text-2xl font-semibold mb-2 text-blue-500">Space Complexity</h2>
+        <ul class="list-disc pl-6">
+            <li class="mb-2 text-white"><strong>Regardless of the input, the matrix chain multiplication algorithm has a space
+                    complexity of O(n^2), where n is the number of matrices.</strong> This space is required to store
+                the min_scalar_multiplications and split_positions tables, and the space complexity remains the same in
+                all cases.</li>
+        </ul>
+    </section>
+
+    <section class="container mx-auto p-4 mt-8 glowing-container">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div class="bg-white rounded-lg p-4 shadow-md">
+                <h2 class="text-2xl font-semibold mb-2 text-blue-500">Initialization:</h2>
+                <ol class="list-disc pl-6">
+                    <li class="text-gray-700">Create two tables: min_scalar_multiplications and split_positions.
+                    </li>
+                    <li class="text-gray-700">Initialize min_scalar_multiplications for single-matrix subchains (length
+                        1).</li>
+                    <li class="text-gray-700">Initialize all other entries in min_scalar_multiplications to infinity.
+                    </li>
+                </ol>
+            </div>
+            <div class="bg-white rounded-lg p-4 shadow-md">
+                <h2 class="text-2xl font-semibold mb-2 text-blue-500">Recurrence Relation:</h2>
+                <ol class="list-disc pl-6">
+                    <li class="text-gray-700">Use a nested loop structure to find the minimum scalar multiplications for
+                        subchains.</li>
+                    <li class="text-gray-700">Iterate through possible split positions k within each subchain.</li>
+                    <li class="text-gray-700">Calculate the cost of parenthesizing at each k and update
+                        min_scalar_multiplications with the minimum cost.</li>
+                    <li class="text-gray-700"><code><strong> min_scalar_multiplications[i][j] = min(min_scalar_multiplications[i][k] + min_scalar_multiplications[k+1][j] + matrices[i][0] * matrices[k][1] * matrices[j][1] for k in range(i, j))</strong>
+                </code></li>
+                </ol>
+            </div>
+            <div class="bg-white rounded-lg p-4 shadow-md">
+                <h2 class="text-2xl font-semibold mb-2 text-blue-500">Reconstruction of Optimal Parenthesization:</h2>
+                <ol class="list-disc pl-6">
+                    <li class="text-gray-700">Define a recursive function to construct the optimal parenthesization.
+                    </li>
+                    <li class="text-gray-700">Base case: If i equals j, return "M{i}" to represent a single matrix.</li>
+                    <li class="text-gray-700">Find the optimal split position k using split_positions.</li>
+                    <li class="text-gray-700">Recursively construct parenthesizations for the left and right subchains.
+                    </li>
+                    <li class="text-gray-700">Combine results in the form "(left * right)".</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <script src="index.js"></script>
+
+</body>
+
+</html>

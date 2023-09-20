@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Assignment - 1</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .header {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #fffdf9, #b81fcd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 1px #F59E0B, 0 0 3px #F59E0B, 0 0 5px #F59E0B;
+            }
+
+            100% {
+                text-shadow: 0 0 3px #F59E0B, 0 0 5px #F59E0B, 0 0 7px #F59E0B;
+            }
+        }
+
+    button {
+ align-items: center;
+ background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+ border: 0;
+ border-radius: 10px;
+ box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+ box-sizing: border-box;
+ color: #FFFFFF;
+ display: flex;
+ font-family: Phantomsans, sans-serif;
+ font-size: 18px;
+ justify-content: center;
+ line-height: 1em;
+ max-width: 100%;
+ min-width: 140px;
+ padding: 3px;
+ text-decoration: none;
+ user-select: none;
+ -webkit-user-select: none;
+ touch-action: manipulation;
+ white-space: nowrap;
+ cursor: pointer;
+ transition: all .3s;
+ margin-right:20px
+}
+
+button:active,
+button:hover {
+ outline: 0;
+}
+
+button span {
+ background-color: rgb(5, 6, 45);
+ padding: 16px 24px;
+ border-radius: 6px;
+ width: 100%;
+ height: 100%;
+ transition: 300ms;
+}
+
+button:hover span {
+ background: none;
+}
+
+button:active {
+ transform: scale(0.9);
+}
+        .glowing-neon {
+            text-shadow: 0 0 5px #8e2de2, 0 0 10px #8e2de2, 0 0 15px #8e2de2, 0 0 20px #8e2de2, 0 0 25px #8e2de2, 0 0 30px #8e2de2, 0 0 35px #8e2de2;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px #8e2de2, 0 0 10px #8e2de2, 0 0 15px #8e2de2, 0 0 20px #8e2de2, 0 0 25px #8e2de2, 0 0 30px #8e2de2, 0 0 35px #8e2de2;
+            }
+            100% {
+                text-shadow: 0 0 10px #8e2de2, 0 0 20px #8e2de2, 0 0 30px #8e2de2, 0 0 40px #8e2de2, 0 0 50px #8e2de2, 0 0 60px #8e2de2, 0 0 70px #8e2de2;
+            }
+        }
+
+    
+            /* Custom CSS for glowing effect */
+        .glowing-container {
+            background: radial-gradient(circle, #8e2de2 0%, transparent 70%);
+            background-size: 150% 150%;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+       .custom-bg-rgb {
+    background-color: rgb(40, 40, 43);
+}
+    </style>
+</head>
+
+<body class="font-poppins text-xl custom-bg-rgb text-white">
+    <header class="text-white py-4 flex justify-between items-center">
+        <h1 class="text-3xl font-bold text-center flex-grow glowing-neon">Assignment - 1</h1>
+        <button onclick="homepage()"><span class="text">Home </span></button>
+            
+    </header>
+
+    <section class="container mx-auto p-4 bg-white shadow-lg rounded-lg mt-8 text-gray-800 bg-opacity-90 glowing-container">
+        <h2 class="text-2xl font-semibold mb-2 text-blue-500">Bubble Sort Implementation</h2>
+        <p class="mb-4 text-white">Example code snippet of a Bubble sort algorithm implemented in Python:</p>
+        <pre class="bg-gray-200 p-4 rounded-md">
+            <code class="block text-sm font-bold text-xl font-poppins">
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        swapped = False
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+                swapped = True
+        if not swapped:
+            break
+    return arr
+            </code>
+        </pre>
+    </section>
+
+    <section class="container mx-auto p-4 bg-white shadow-lg rounded-lg mt-8 text-gray-800 bg-opacity-90 glowing-container ">
+        <h2 class="text-2xl font-semibold mb-2 text-blue-500">Application of Bubble Sort</h2>
+        <p class="mb-4 text-white">We will apply the Bubble Sort algorithm to a randomly generated array of integers and measure
+            the time taken:</p>
+        <pre class="bg-gray-200 p-4 rounded-md">
+            <code class="block text-sm font-bold text-xl font-poppins">
+import random
+import time
+
+arr = [random.randint(1, 1000) for _ in range(1000)]
+
+start_time = time.time()
+sorted_arr = bubble_sort(arr.copy())
+end_time = time.time()
+
+print("Sorted Array:", sorted_arr)
+print("Time taken by Bubble Sort:", end_time - start_time, "seconds")
+            </code>
+        </pre>
+        <pre>
+<strong class="text-white">Example Input:[1,7,9,4,5,6]</strong>
+<strong class="text-white" >Example Output:[1,4,5,6,7,9]</strong>
+        </pre>
+    </section>
+
+    <section class="container mx-auto p-4 bg-white shadow-lg rounded-lg mt-8 text-white bg-opacity-90 glowing-container">
+        <h2 class="text-2xl font-semibold mb-2 text-blue-500">Time Complexity Analysis</h2>
+        <ul class="list-disc pl-6">
+            <li class="mb-2"><strong>Worst-Case Time Complexity:</strong> O(n^2) - Occurs when the input array is in
+                reverse order.</li>
+            <li class="mb-2"><strong>Best-Case Time Complexity:</strong> O(n) - Occurs when the input array is already
+                sorted.</li>
+            <li class="mb-2"><strong>Average-Case Time Complexity:</strong> O(n^2) - Even if the input is not in reverse
+                order.</li>
+        </ul>
+    </section>
+
+    <section class="container mx-auto p-4 mt-8 glowing-container">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div class="bg-white rounded-lg p-4 shadow-md">
+                <h2 class="text-2xl font-semibold mb-2 text-blue-500">Bubble Sort</h2>
+                <p class="text-gray-700"><strong>Algorithm:</strong> Simple, compares and swaps adjacent elements.</p>
+                <p class="text-gray-700"><strong>Efficiency:</strong> Inefficient for large datasets (O(n^2)).</p>
+                <p class="text-gray-700"><strong>Space Usage:</strong> In-place (O(1)).</p>
+                <p class="text-gray-700"><strong>Stability:</strong> Stable (preserves relative order of equal
+                    elements).</p>
+                <p class="text-gray-700"><strong>Scenarios:</strong> Suitable for small datasets, educational purposes,
+                    or nearly sorted data.</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 shadow-md">
+                <h2 class="text-2xl font-semibold mb-2 text-blue-500">Quick Sort</h2>
+                <p class="text-gray-700"><strong>Algorithm:</strong> Divide-and-conquer, partitions based on a pivot
+                    element.</p>
+                <p class="text-gray-700"><strong>Efficiency:</strong> Efficient for large datasets on average (O(n log
+                    n)).</p>
+                <p class="text-gray-700"><strong>Space Usage:</strong> In-place with additional space for recursion
+                    (O(log n)).</p>
+                <p class="text-gray-700"><strong>Stability:</strong> Not inherently stable but can be modified to be
+                    stable.</p>
+                <p class="text-gray-700"><strong>Scenarios:</strong> Preferred for real-world applications, large
+                    datasets, and when efficiency is crucial.</p>
+            </div>
+        </div>
+    </section>
+
+<script src="index.js"></script>
+
+</body>
+
+</html>
